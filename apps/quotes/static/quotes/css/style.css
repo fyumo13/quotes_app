@@ -1,0 +1,16 @@
+span {
+  color: rgb(255, 134, 134);
+}
+
+.quotes, .favorites {
+  width: 40%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.quote, .favorite {
+  border: 1px solid rgb(159, 167, 172);
+  border-radius: 10px;
+  margin: 5px 0;
+  padding: 5px;
+}

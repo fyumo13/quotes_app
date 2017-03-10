@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quotes Dashboard</title>
+    {% load staticfiles %}
+    <link href="{% static 'quotes/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'quotes/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'quotes/css/starter-template.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'quotes:index' %}">Quotes App</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'quotes:quotes' %}">Home</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'login_registration:logout' %}">Log Out <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="page-header">
+        <h2>Welcome, {{request.session.first_name}}!</h2>
+      </div>
+      <div class="container">
+        <div class="quotes jumbotron">
+          <h4>Quotable Quotes</h4>
+          {% if quotes %}
+            {% for quote in quotes %}
+            <div class="quote">
+              <p>{{quote.author}}: {{quote.quote}}</p>
+                <p>Posted by <a href="{% url 'quotes:user' id=quote.posted_by.id %}">{{quote.posted_by}}</a></p>
+              <a href="{% url 'quotes:add_to_list' id=quote.id %}">Add to My List</a>
+            </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+        <div class="favorites jumbotron">
+          <h4>Your Favorites</h4>
+          {% if favorites %}
+            {% for favorite in favorites %}
+            <div class="favorite">
+              <p>{{favorite.author}}: {{favorite.quote}}</p>
+              <p>Posted by <a href="{% url 'quotes:user' id=favorite.posted_by.id %}">{{favorite.posted_by}}</a></p>
+              <a href="{% url 'quotes:remove' id=favorite.id %}">Remove From My List</a>
+            </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="add_quote">
+        <h4>Contribute a Quote</h4>
+        <form action="{% url 'quotes:post_quote' %}" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label>Quoted By:</label>
+            <input type="text" name="author" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Message:</label>
+            <input type="text" name="quote" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+      </div>
+      <div class="errors">
+        {% if messages %}
+          {% for message in messages %}
+            <p>{{message}}</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'quotes/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

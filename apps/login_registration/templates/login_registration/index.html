@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login and Registration Page</title>
+    {% load staticfiles %}
+    <link href="{% static 'login_registration/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'login_registration/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'login_registration/css/starter-template.css' %}" rel="stylesheet">
+  </head>
+  <body class="wrapper">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'login_registration:index' %}">Login and Registration</a>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="register">
+        <form class="form-signin" action="{% url 'login_registration:register' %}" method="post">
+          {% csrf_token %}
+          <h2 class="form-signin-heading">Register New User</h2>
+          <label class="sr-only">First Name</label>
+          <input type="text" name="first_name" class="form-control" placeholder="First name" required autofocus>
+          <label class="sr-only">Last Name</label>
+          <input type="text" name="last_name" class="form-control" placeholder="Last name" required>
+          <label class="sr-only">Email address</label>
+          <input type="text" name="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+          <label class="sr-only">Password</label>
+          <input type="text" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          <label class="sr-only">Confirm Password</label>
+          <input type="text" name="confirm_password" id="inputPassword" class="form-control" placeholder="Confirm Password" required>
+          <label class="sr-only">Birthdate</label>
+          <input type="text" name="birthdate" class="form-control" placeholder="Birthdate" required>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        </form>
+      </div>
+      <div class="login">
+        <form class="form-signin" action="{% url 'login_registration:login' %}" method="post">
+          {% csrf_token %}
+          <h2 class="form-signin-heading">Log In</h2>
+          <label class="sr-only">Email address</label>
+          <input type="text" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+          <label class="sr-only">Password</label>
+          <input type="text" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+        </form>
+      </div>
+      <div class="errors">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-danger" role="alert">
+              <strong>Uh oh!</strong> {{message}}
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'login_registration/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

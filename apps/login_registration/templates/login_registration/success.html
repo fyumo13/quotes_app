@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome Page</title>
+    {% load staticfiles %}
+    <link href="{% static 'login_registration/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'login_registration/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'login_registration/css/starter-template.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'login_registration:index' %}">Login and Registration</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{% url 'login_registration:logout' %}">Log Out <span class="sr-only">(current)</span></a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="page-header">
+        <h3>Welcome, {{request.session.first_name}}!</h3>
+      </div>
+      <div class="container">
+        <div class="jumbotron">
+          <p>You have successfully registered/logged into your account!</p>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'login_registration/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

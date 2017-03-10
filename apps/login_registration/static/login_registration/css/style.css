@@ -1,0 +1,40 @@
+.wrapper {
+  background-color: rgb(216, 224, 232);
+}
+
+.errors {
+  margin: 5px;
+}
+
+.login, .register {
+  width: 35%;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 160px;
+}
+  .login h2, .register h2 {
+    color: rgb(113, 123, 133);
+  }
+
+.post {
+  width: 70%;
+  margin: 0 auto;
+}
+  .post button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 92%;
+  }
+
+.content {
+  border: 1px solid black;
+  padding: 10px 5px;
+}
+
+.date {
+  margin-left: 85%;
+}
+
+.comments {
+  margin: 0 20px;
+}
